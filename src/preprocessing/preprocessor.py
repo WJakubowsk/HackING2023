@@ -5,6 +5,7 @@ from langdetect import detect
 import spacy
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import re
 
 
 class Preprocessor:
@@ -13,7 +14,7 @@ class Preprocessor:
 
     def preprocess_text(self, text_col, lemmatize=False):
         self.df[text_col] = self.df[text_col].apply(lambda x: str(x))
-        self.convert_text_to_lowercase(text_col)
+        self.convert_text_to_lowercase_and_remove_punctation(text_col)
         self.detect_language(text_col)
         self.autocorrect_words(text_col)
         if lemmatize:
@@ -34,8 +35,12 @@ class Preprocessor:
 
         self.df['language'] = self.df[text_col].apply(lambda x: _detect_with_ignore(x))
 
-    def convert_text_to_lowercase(self, text_col: str):
+    def convert_text_to_lowercase_and_remove_punctation(self, text_col: str):
         self.df[text_col] = self.df[text_col].str.lower()
+        self.df[text_col] = self.df[text_col].apply(lambda x: self.remove_punctuation(x))
+
+    def remove_punctuation(self, text):
+        return re.sub(r'[^\w\s]', '', text)
 
     def autocorrect_words(self, text_col: str):
         languages = set(self.df['language'])
@@ -77,7 +82,30 @@ class Preprocessor:
     def lemmatize_text(self, text, language='en'):
         if language == "pl":
             nlp = spacy.load("pl_core_news_sm")
-        # elif language == "eng":
+        elif language == "ca":
+            nlp = spacy.load("ca_core_news_sm")
+        elif language == "da":
+            nlp = spacy.load("da_core_news_sm")
+        elif language == "de":
+            nlp = spacy.load("de_core_news_sm")
+        elif language == "es":
+            nlp = spacy.load("es_core_news_sm")
+        elif language == "fi":
+            nlp = spacy.load("fi_core_news_sm")
+        elif language == "fr":
+            nlp = spacy.load("fr_core_news_sm")
+        elif language == "hr":
+            nlp = spacy.load("hr_core_news_sm")
+        elif language == "it":
+            nlp = spacy.load("it_core_news_sm")
+        elif language == "nl":
+            nlp = spacy.load("nl_core_news_sm")
+        elif language == "pt":
+            nlp = spacy.load("pt_core_news_sm")
+        elif language == "ro":
+            nlp = spacy.load("ro_core_news_sm")
+        elif language == "sv":
+            nlp = spacy.load("sv_core_news_sm")
         else:
             nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
