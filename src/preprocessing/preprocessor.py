@@ -14,7 +14,7 @@ class Preprocessor:
         self.df[text_col] = self.df[text_col].apply(lambda x: str(x))
         self.convert_text_to_lowercase(text_col)
         self.detect_language(text_col)
-        self.autocorrect_words(text_col)
+        # self.autocorrect_words(text_col)
         if lemmatize:
             self.remove_stopwords_column(text_col, language="en")
             self.lemmatize_column(text_col, language="en")

@@ -2,3 +2,5 @@ numpy
 pandas
 autocorrect
 langdetect
+spacy
+nltk
