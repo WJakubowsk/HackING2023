@@ -140,3 +140,6 @@ dmypy.json
 # Datsets
 
 /data
+
+#venv
+/hacking

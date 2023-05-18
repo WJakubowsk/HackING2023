@@ -16,7 +16,7 @@ class Preprocessor:
         self.df[text_col] = self.df[text_col].apply(lambda x: str(x))
         self.convert_text_to_lowercase_and_remove_punctation(text_col)
         self.detect_language(text_col)
-        self.autocorrect_words(text_col)
+        # self.autocorrect_words(text_col)
         if lemmatize:
             self.remove_stopwords_column(text_col)
             self.lemmatize_column(text_col)
@@ -36,11 +36,10 @@ class Preprocessor:
         self.df['language'] = self.df[text_col].apply(lambda x: _detect_with_ignore(x))
 
     def convert_text_to_lowercase_and_remove_punctation(self, text_col: str):
+        def remove_punctuation(text):
+            return re.sub(r'[^\w\s]', '', text)
         self.df[text_col] = self.df[text_col].str.lower()
-        self.df[text_col] = self.df[text_col].apply(lambda x: self.remove_punctuation(x))
-
-    def remove_punctuation(self, text):
-        return re.sub(r'[^\w\s]', '', text)
+        self.df[text_col] = self.df[text_col].apply(lambda x: remove_punctuation(x))
 
     def autocorrect_words(self, text_col: str):
         languages = set(self.df['language'])
