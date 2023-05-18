@@ -53,7 +53,7 @@ class Preprocessor:
         if language == 'eng':
             stop_words = set(stopwords.words('english'))
         elif language == 'pl':
-            with open('data/stop_words_polish.txt', 'r', encoding='utf-8') as file:
+            with open('../../data/stop_words_polish.txt', 'r', encoding='utf-8') as file:
                 content = file.readlines()
                 content = [line.strip() for line in content]
                 stop_words = set(content)
