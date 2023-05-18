@@ -19,7 +19,6 @@ class Preprocessor:
             self.remove_stopwords_column(text_col, language="en")
             self.lemmatize_column(text_col, language="en")
 
-
     def preprocess_image(self, image_col):
         #TODO
         pass
