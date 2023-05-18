@@ -63,12 +63,7 @@ class Preprocessor:
 
     def remove_stopwords(self, text, language='en'):
         if language == 'pl':
-            with open('../../data/stop_words_german.txt', 'r', encoding='utf-8') as file:
-                content = file.readlines()
-                content = [line.strip() for line in content]
-                stop_words = set(content)
-        elif language == 'de':
-            with open('../../data/stop_words_polish.txt', 'r', encoding='utf-8') as file:
+            with open('../../data/stopwords/stop_words_polish.txt', 'r', encoding='utf-8') as file:
                 content = file.readlines()
                 content = [line.strip() for line in content]
                 stop_words = set(content)
@@ -88,30 +83,6 @@ class Preprocessor:
     def lemmatize_text(self, text, language='en'):
         if language == "pl":
             nlp = spacy.load("pl_core_news_sm")
-        elif language == "ca":
-            nlp = spacy.load("ca_core_news_sm")
-        elif language == "da":
-            nlp = spacy.load("da_core_news_sm")
-        elif language == "de":
-            nlp = spacy.load("de_core_news_sm")
-        elif language == "es":
-            nlp = spacy.load("es_core_news_sm")
-        elif language == "fi":
-            nlp = spacy.load("fi_core_news_sm")
-        elif language == "fr":
-            nlp = spacy.load("fr_core_news_sm")
-        elif language == "hr":
-            nlp = spacy.load("hr_core_news_sm")
-        elif language == "it":
-            nlp = spacy.load("it_core_news_sm")
-        elif language == "nl":
-            nlp = spacy.load("nl_core_news_sm")
-        elif language == "pt":
-            nlp = spacy.load("pt_core_news_sm")
-        elif language == "ro":
-            nlp = spacy.load("ro_core_news_sm")
-        elif language == "sv":
-            nlp = spacy.load("sv_core_news_sm")
         else:
             nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
