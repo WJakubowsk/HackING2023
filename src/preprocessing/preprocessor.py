@@ -81,5 +81,4 @@ class Preprocessor:
         else:
             nlp = spacy.load("en_core_web_sm")
         doc = nlp(text)
-        lemmas = [token.lemma_ for token in doc]
-        return " ".join(lemmas)
+        return str([token.lemma_ for token in doc])
