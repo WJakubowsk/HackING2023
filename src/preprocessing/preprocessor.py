@@ -3,7 +3,7 @@ class Preprocessor:
         self.df = df
     
     def preprocess_text(self, text_col):
-        #TODO
+        self._convert_text_to_lowercase(text_col)
         pass
 
     def preprocess_image(self, image_col):
