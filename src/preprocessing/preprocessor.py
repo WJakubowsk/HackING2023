@@ -10,13 +10,15 @@ class Preprocessor:
     def __init__(self, df: pd.DataFrame) -> None:
         self.df = df
     
-    def preprocess_text(self, text_col, language='eng'):
+    def preprocess_text(self, text_col, lemmatize = False):
         self.df[text_col] = self.df[text_col].apply(lambda x: str(x))
-        self.detect_language(text_col)
         self.convert_text_to_lowercase(text_col)
-        self.remove_stopwords_column(text_col, language)
-        self.lemmatize_column(text_col, language)
+        self.detect_language(text_col)
         self.autocorrect_words(text_col)
+        if lemmatize:
+            self.remove_stopwords_column(text_col, language="en")
+            self.lemmatize_column(text_col, language="en")
+
 
     def preprocess_image(self, image_col):
         #TODO
