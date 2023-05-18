@@ -37,7 +37,11 @@ class Preprocessor:
 
     def convert_text_to_lowercase_and_remove_punctation(self, text_col: str):
         def remove_punctuation(text):
-            return re.sub(r'[^\w\s]', '', text)
+            punc = '''!()-[]{};:'"\,<>./?@#$%^&*_~=+'''
+            for ele in text:
+                if ele in punc:
+                    text = text.replace(ele, "")
+            return text
         self.df[text_col] = self.df[text_col].str.lower()
         self.df[text_col] = self.df[text_col].apply(lambda x: remove_punctuation(x))
 
