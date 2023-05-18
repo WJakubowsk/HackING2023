@@ -59,15 +59,18 @@ class Preprocessor:
         )
 
     def remove_stopwords(self, text, language='en'):
-        # TODO:
-        # dodać języki dla lemmatize_text i remove_stopwords
-        if language == 'en':
-            stop_words = set(stopwords.words('english'))
-        elif language == 'pl':
+        if language == 'pl':
+            with open('../../data/stop_words_german.txt', 'r', encoding='utf-8') as file:
+                content = file.readlines()
+                content = [line.strip() for line in content]
+                stop_words = set(content)
+        elif language == 'de':
             with open('../../data/stop_words_polish.txt', 'r', encoding='utf-8') as file:
                 content = file.readlines()
                 content = [line.strip() for line in content]
                 stop_words = set(content)
+        else:
+            stop_words = set(stopwords.words('english'))
 
         word_tokens = word_tokenize(text)
         filtered_sentence = [w for w in word_tokens if not w in stop_words]
