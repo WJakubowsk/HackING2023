@@ -9,10 +9,9 @@ class Model:
     Ensemble method model class, which takes predictions of three independent models into consideration
     The models are already trained, so this class is for the inference purpose
     """
-    def __init__(self, vision_model, text_model, tfidf_vectorizer, statistical_model, dataset):
+    def __init__(self, vision_model, text_model, tfidf_vectorizer, dataset):
         self.vision_model = vision_model
         self.text_model = text_model
-        self.statistical_model = statistical_model
         self.tfidf_vectorizer = tfidf_vectorizer
         X = dataset.drop(axis=1)
     
@@ -21,6 +20,9 @@ class Model:
         predictions = self.text_model.predict(X_vect)
         predictions_proba = self.text_model.predict_proba(X_vect)
         return predictions, predictions_proba
+    
+    def vision_model_predict(self):
+        pass
 
     def predict_obs(self, obs: pd.Series, prob_threshold: float):
         """
@@ -31,6 +33,8 @@ class Model:
         text_predictions, text_pred_proba = self.text_model_predict()
 
         if np.max(self.text_model.predict_proba(obs)) > prob_threshold:
-            return self.text_model.predict(obs)
+            return text_predictions
         else:
-            return self.vision_model.predict(obs)
+            #TODO lukasz predykcja
+            visual_prediction = self.vision_model_predict()
+

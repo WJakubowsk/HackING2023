@@ -29,4 +29,6 @@ def run():
         st.write(str(apply_ocr((parse_image(uploaded_image)))))
 
         st.markdown("Predictions:")
+
+        
     return parse_image(uploaded_image)
