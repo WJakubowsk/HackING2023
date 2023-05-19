@@ -74,6 +74,8 @@ class Preprocessor:
         filtered_sentence = [w for w in word_tokens if not w in stop_words]
         return ' '.join(filtered_sentence)
 
+
+
     def lemmatize_column(self, text_col):
         self.df[text_col] = self.df.apply(
             lambda row: self.lemmatize_text(text=row[text_col], language=row['language']),
