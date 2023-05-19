@@ -1,5 +1,5 @@
 import streamlit as st
-from contents import data_upload
+import data_upload
 
 
 def main():
