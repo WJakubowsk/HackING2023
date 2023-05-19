@@ -1,25 +1,17 @@
 import streamlit as st
 import numpy as np
-<<<<<<< HEAD
 import easyocr
-=======
 from PIL import Image
 
->>>>>>> 8d13cb4efb241f39e801818b6467b39573a3e789
-
-
-def parse(file):
-    
-    #parse image to np array  
+def parse_image(file):
     img = Image.open(file)
     np_img = np.array(img)
-
     return np_img
 
 
-def apply_ocr(file):
+def apply_ocr(parsed_file):
     reader = easyocr.Reader(['en','pl'])
-    text = reader.readtext(file, detail = 0)
+    text = reader.readtext(parsed_file, detail = 0)
     print(text)
     return text
 
@@ -33,8 +25,8 @@ def run():
         st.markdown("Uploaded image:")
         st.image(uploaded_image, width=700)
 
-        st.markdown("Ocr")
-        st.write(str(apply_ocr(uploaded_image)))
+        st.markdown("Detected text:")
+        st.write(str(apply_ocr((parse_image(uploaded_image)))))
 
         st.markdown("Predictions:")
-    return parse(uploaded_image)
+    return parse_image(uploaded_image)
