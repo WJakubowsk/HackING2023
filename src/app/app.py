@@ -5,7 +5,7 @@ from contents import data_upload
 def main():
     st.title("Document classification demo")
 
-    image = data_upload.run()
+    data_upload.run()
 
 
 
