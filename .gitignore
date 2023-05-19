@@ -143,3 +143,6 @@ dmypy.json
 
 #venv
 /hacking
+
+#pretrained models
+/pretrained

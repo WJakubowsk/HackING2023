@@ -4,3 +4,4 @@ autocorrect
 langdetect
 spacy
 nltk
+streamlit
