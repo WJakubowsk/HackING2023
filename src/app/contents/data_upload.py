@@ -1,13 +1,17 @@
 import streamlit as st
 import numpy as np
+from PIL import Image
 
 
 
 def parse(file):
-    #TODO
-    #parse image to np array 
-    # return 
-    pass
+    
+    #parse image to np array  
+    img = Image.open(file)
+    np_img = np.array(img)
+
+    return np_img
+
 
 
 def run():
